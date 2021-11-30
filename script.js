@@ -60,7 +60,7 @@ console.log(showTypeOf(title) ,showTypeOf(fullPrice), showTypeOf(adaptive));
 console.log(screens);
 console.log(getRollbackMessage(fullPrice));
 console.log(Math.ceil(servicePercentPrice()));
-
+console.log(fullPrice);
 
 // console.log("First console message");
 // alert("Hi!");
