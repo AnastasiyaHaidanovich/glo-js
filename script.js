@@ -8,7 +8,7 @@ let servicePrice1 = prompt("Сколько это будет стоить?");
 let service2 = prompt("Какой дополнительный тип услуги нужен?");
 let servicePrice2 = prompt("Сколько это будет стоить?");
 
-let adaptive = Boolean(prompt("Нужен ли адаптив на сайте?", "Если адаптив не нужен, оставьте строку пустой"));
+let adaptive = confirm("Нужен ли адаптив на сайте?");
 let fullPrice = +screenPrice + (+servicePrice1) + (+servicePrice2);
 let feePay = fullPrice * (rollback/100);
 let servicePercentPrice = fullPrice - feePay;
