@@ -19,7 +19,7 @@ const appData = {
         appData.screens = prompt("Какие типы экранов нужно разработать?","Простые, Сложные, Интерактивные");
        
         do {
-            appData.screenPrice = +prompt("Сколько будет стоить данная работа?");
+            appData.screenPrice = prompt("Сколько будет стоить данная работа?");
         }
         while (!appData.isNumber(appData.screenPrice));
         
