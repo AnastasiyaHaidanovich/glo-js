@@ -82,12 +82,6 @@ const appData = {
         return !isNaN(parseFloat(num)) && isFinite(num);
     },
 
-    isString: function (str){
-        if (typeof str === "string" && Number.isNaN(str)){
-           return true; 
-        }
-    },
-
     getFullPrice: function() {
         appData.fullPrice =  (+appData.screenPrice + (+appData.allServicePrices));
     },
