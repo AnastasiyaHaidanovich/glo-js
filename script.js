@@ -58,7 +58,8 @@ const appData = {
             }
             while (!appData.isNumber(price));
 
-            appData.services[name] = +price;
+            appData.services[i+name] = +price;
+            
         }
         appData.adaptive = confirm("Нужен ли адаптив на сайте?");
     },
@@ -111,6 +112,7 @@ const appData = {
         console.log(appData.screens);
         console.log(appData.screenPrice);
         console.log(appData.title);
+        console.log(appData.services);
     }
 };
 
