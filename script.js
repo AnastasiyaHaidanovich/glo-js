@@ -110,7 +110,7 @@ const appData = {
         console.log(appData.servicePercentPrice);
         console.log(appData.screens);
         console.log(appData.screenPrice);
-        console.log(appData.title);
+        console.log(appData.services);
     }
 };
 
