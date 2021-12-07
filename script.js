@@ -1,9 +1,20 @@
 'use strict';
 
-let mainTitle = document.getElementsByTagName('h1');
-
-console.log(mainTitle[0]);
-
+let mainTitle = document.getElementsByTagName('h1')[0];
+let btnCalc = document.getElementsByClassName("handler_btn")[0];
+let btnReset = document.getElementsByClassName("handler_btn")[1];
+let btnPlus = document.querySelector(".screen-btn");
+let number = document.querySelectorAll(".other-items.number");
+let percent = document.querySelectorAll(".other-items.percent");
+let rollbackInput = document.querySelector(".rollback > div > input[type=range]");
+let rangeValue = document.querySelector(".rollback > div > span.range-value");
+let totalInputHtml = document.getElementsByClassName("total-input")[0];
+let totalInputScreens = document.getElementsByClassName("total-input")[1];
+let totalInputServices = document.getElementsByClassName("total-input")[2];
+let totalInputValue = document.getElementsByClassName("total-input")[3];
+let totalInputRollback = document.getElementsByClassName("total-input")[4];
+let screens = document.querySelectorAll(".screen")[0];
+console.log(screens);
 const appData = {
     screens: [],
     rollback: 17,
