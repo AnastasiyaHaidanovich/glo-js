@@ -1,5 +1,9 @@
 'use strict';
 
+let mainTitle = document.getElementsByTagName('h1');
+
+console.log(mainTitle[0]);
+
 const appData = {
     screens: [],
     rollback: 17,
@@ -114,4 +118,4 @@ const appData = {
     }
 };
 
-appData.start();
+// appData.start();
