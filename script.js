@@ -14,7 +14,7 @@ let totalInputServices = document.getElementsByClassName("total-input")[2];
 let totalInputValue = document.getElementsByClassName("total-input")[3];
 let totalInputRollback = document.getElementsByClassName("total-input")[4];
 let screens = document.querySelectorAll(".screen")[0];
-console.log(screens);
+
 const appData = {
     screens: [],
     rollback: 17,
