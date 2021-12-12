@@ -28,12 +28,34 @@ const appData = {
     count: [],
     servicesPercent: {},
     servicesNumber: {},
+    isError: false,
+
     init: function(){
         appData.addTitle();        
-        btnCalc.addEventListener('click', appData.start);
+        btnCalc.addEventListener('click', appData.checkValues);
         btnPlus.addEventListener('click', appData.addScreenBlock);
         appData.addRollback();
     },
+
+    checkValues: function(){
+        appData.isError = false;
+        screens = document.querySelectorAll(".screen");
+        screens.forEach(screen => {
+            const select = screen.querySelector("select");
+            const input = screen.querySelector("input[type=text]");
+
+            if(select.value === "" || input.value === ""){
+                appData.isError = true;
+            }
+        });
+
+        if(!appData.isError){
+            appData.start();
+        } else {
+            alert("Нужно заполнить поля!");
+        }
+    },
+
     addTitle: function(){
         document.title = title.textContent;
     },
