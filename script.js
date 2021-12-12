@@ -145,19 +145,20 @@ const appData = {
             screenCount += +screen;
         });
         totalInputScreens.value = screenCount;
-
-        appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback/100));
-
-        totalInputRollback.value = appData.servicePercentPrice;
     },
 
     addRollback: function(){
         rollbackInput.addEventListener('input', function(){
             rangeValue.innerText = rollbackInput.value + "%";
             appData.rollback = rollbackInput.value;
-        });
-        
-    },
+            function addRollbackValue() {
+                appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback/100));
+
+                totalInputRollback.value = appData.servicePercentPrice; 
+            }
+            addRollbackValue();
+        });       
+    },    
 
     titleCorrector: function (){
         appData.title = appData.title.trim().slice(0, 1).toUpperCase() + appData.title.toLowerCase().trim().slice(1);
