@@ -64,6 +64,7 @@ const appData = {
         appData.addScreens();
         appData.addServices();
         appData.addPrices();
+        appData.addRollback();
         console.log(appData);
         appData.showResult();
     },
@@ -72,6 +73,7 @@ const appData = {
         totalInputHtml.value = appData.screenPrice;
         totalInputServices.value = appData.servicePricesPercent + appData.servicePricesNumber;
         totalInputValue.value = appData.fullPrice;
+        appData.addRollbackValue();
     },
 
     addScreens: function(){
@@ -151,14 +153,16 @@ const appData = {
         rollbackInput.addEventListener('input', function(){
             rangeValue.innerText = rollbackInput.value + "%";
             appData.rollback = rollbackInput.value;
-            function addRollbackValue() {
-                appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback/100));
-
-                totalInputRollback.value = appData.servicePercentPrice; 
-            }
-            addRollbackValue();
+        
+            appData.addRollbackValue();
         });       
     },    
+
+    addRollbackValue: function() {
+        appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback/100));
+
+        totalInputRollback.value = appData.servicePercentPrice; 
+    },
 
     titleCorrector: function (){
         appData.title = appData.title.trim().slice(0, 1).toUpperCase() + appData.title.toLowerCase().trim().slice(1);
