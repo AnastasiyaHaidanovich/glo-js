@@ -189,6 +189,11 @@ const appData = {
                     elem.remove();
                 }
             });
+            console.log(screens);
+            let g = screens[0];
+            screens = [];
+            screens.push(g);
+            console.log(screens);
             
             viewsSelect.forEach(elem => {
                 elem.disabled = false;
@@ -221,9 +226,18 @@ const appData = {
     },
     
     reset: function(){
-        this.addScreens();
-        this.addPrices.call(appData);
-        this.addRollback();
+        this.screens = [];
+        this.rollback = 0;
+        this.screenPrice = 0;
+        this.adaptive = true;
+        this.title = "";
+        this.servicePricesPercent = 0;
+        this.servicePricesNumber = 0;
+        this.fullPrice = 0;
+        this.servicePercentPrice = 0;
+        this.count = [];
+        this.servicesPercent = {};
+        this.servicesNumber = {};
         this.init();
     },
 
