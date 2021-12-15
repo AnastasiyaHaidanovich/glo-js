@@ -18,6 +18,8 @@ let cmsInput = document.getElementById("cms-open");
 let cmsBlock = document.querySelector(".hidden-cms-variants");
 let additionalInput = cmsBlock.querySelector(".main-controls__input");
 
+let cmsSelect = document.getElementById("cms-select");
+let options = cmsSelect.querySelectorAll("option");
 
 const appData = {
     screens: [],
@@ -34,11 +36,15 @@ const appData = {
     servicesNumber: {},
     isError: false,
     priceCoeff: 1,
+    wordpressValue: 1,
 
     init: function(){
         this.addTitle();  
-        cmsInput.addEventListener('click', this.openCms);      
+        console.log(this.wordpressValue); 
+        cmsInput.addEventListener('click', this.openCms);   
+        console.log(this.wordpressValue);   
         btnCalc.addEventListener('click', this.checkValues.bind(this));
+        console.log(this.wordpressValue); 
         btnPlus.addEventListener('click', this.addScreenBlock);
         this.addRollback();
     },
@@ -48,14 +54,15 @@ const appData = {
             cmsBlock.style.display = "none";
         } else {
             cmsBlock.style.display = "flex";
-            let cmsSelect = document.getElementById("cms-select");
-            let options = cmsSelect.querySelectorAll("option");
+            
             cmsSelect.addEventListener('input', () => {
                 options.forEach((option) => {
                     if (option.value == "other" && option.selected){
                     additionalInput.style.display = "block";
-                    } else if(option.value == "50" && option.selected) {
-                        this.fullPrice *= 1.5;
+                    // } else if(option.value == "50" && option.selected) {
+                    //     this.wordpressValue = 1 + (+option.value / 100);
+                    //     console.log(this.wordpressValue);
+                    //     return this.wordpressValue;
                     } else {
                         additionalInput.style.display = "none";
                     }
@@ -162,8 +169,16 @@ const appData = {
         for (let key in this.servicesPercent) {
             this.servicePricesPercent += this.screenPrice * (this.servicesPercent[key]/100);
         }
-        this.fullPrice =  +this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
-        this.fullPrice *= this.priceCoeff;
+
+        this.fullPrice = +this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
+        
+        options.forEach((option) => {
+            if(option.value == "50" && option.selected) {
+                this.wordpressValue = 1 + (+option.value / 100);
+            }
+        });
+    
+        this.fullPrice *= this.wordpressValue;        
 
         let screenCount = 0;
         this.count.forEach((screen) => {
