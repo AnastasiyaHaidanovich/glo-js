@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 let title = document.getElementsByTagName('h1')[0];
 let btnCalc = document.getElementsByClassName("handler_btn")[0];
@@ -14,6 +14,8 @@ let totalInputServices = document.getElementsByClassName("total-input")[2];
 let totalInputValue = document.getElementsByClassName("total-input")[3];
 let totalInputRollback = document.getElementsByClassName("total-input")[4];
 let screens = document.querySelectorAll(".screen");
+let cmsInput = document.getElementById("cms-open");
+let cmsBlock = document.querySelector(".hidden-cms-variants");
 
 const appData = {
     screens: [],
@@ -34,7 +36,30 @@ const appData = {
         this.addTitle();        
         btnCalc.addEventListener('click', this.checkValues.bind(appData));
         btnPlus.addEventListener('click', this.addScreenBlock);
+        cmsInput.addEventListener('click', this.openCms);
         this.addRollback();
+    },
+
+    openCms: function(){
+        if(cmsBlock.style.display === "flex"){
+            cmsBlock.style.display = "none";
+        } else {
+            cmsBlock.style.display = "flex";
+            let cmsSelect = document.getElementById("cms-select");
+            let additionalInput = cmsBlock.querySelector(".main-controls__input");
+            let options = cmsSelect.querySelectorAll("option");
+            cmsSelect.addEventListener('input', () => {
+                options.forEach((option) => {
+                if (option.value == "other" && option.selected){
+                additionalInput.style.display = "block";
+                } else {
+                    additionalInput.style.display = "none";
+                }
+            });
+            
+            });
+            
+        }   
     },
 
     addTitle: function(){
@@ -190,9 +215,9 @@ const appData = {
                 }
             });
             console.log(screens);
-            let g = screens[0];
+            let newScreen = screens[0];
             screens = [];
-            screens.push(g);
+            screens.push(newScreen);
             console.log(screens);
             
             viewsSelect.forEach(elem => {
