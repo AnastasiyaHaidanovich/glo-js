@@ -16,6 +16,8 @@ let totalInputRollback = document.getElementsByClassName("total-input")[4];
 let screens = document.querySelectorAll(".screen");
 let cmsInput = document.getElementById("cms-open");
 let cmsBlock = document.querySelector(".hidden-cms-variants");
+let additionalInput = cmsBlock.querySelector(".main-controls__input");
+
 
 const appData = {
     screens: [],
@@ -31,12 +33,13 @@ const appData = {
     servicesPercent: {},
     servicesNumber: {},
     isError: false,
+    priceCoeff: 1,
 
     init: function(){
-        this.addTitle();        
-        btnCalc.addEventListener('click', this.checkValues.bind(appData));
+        this.addTitle();  
+        cmsInput.addEventListener('click', this.openCms);      
+        btnCalc.addEventListener('click', this.checkValues.bind(this));
         btnPlus.addEventListener('click', this.addScreenBlock);
-        cmsInput.addEventListener('click', this.openCms);
         this.addRollback();
     },
 
@@ -46,19 +49,19 @@ const appData = {
         } else {
             cmsBlock.style.display = "flex";
             let cmsSelect = document.getElementById("cms-select");
-            let additionalInput = cmsBlock.querySelector(".main-controls__input");
             let options = cmsSelect.querySelectorAll("option");
             cmsSelect.addEventListener('input', () => {
                 options.forEach((option) => {
-                if (option.value == "other" && option.selected){
-                additionalInput.style.display = "block";
-                } else {
-                    additionalInput.style.display = "none";
-                }
+                    if (option.value == "other" && option.selected){
+                    additionalInput.style.display = "block";
+                    } else if(option.value == "50" && option.selected) {
+                        this.fullPrice *= 1.5;
+                    } else {
+                        additionalInput.style.display = "none";
+                    }
+                    
+                });
             });
-            
-            });
-            
         }   
     },
 
@@ -69,9 +72,9 @@ const appData = {
     start: function(){
         this.addScreens();
         this.addServices();
-        this.addPrices.call(appData);
+        this.addPrices.call(this);
         this.addRollback();
-        console.log(appData);
+        console.log(this);
         this.showResult();
         this.makeDisable();
     },
@@ -88,7 +91,7 @@ const appData = {
             }
         });
 
-        if(!appData.isError){
+        if(!this.isError){
             this.start();
         } else {
             alert("Нужно заполнить поля!");
@@ -160,6 +163,7 @@ const appData = {
             this.servicePricesPercent += this.screenPrice * (this.servicesPercent[key]/100);
         }
         this.fullPrice =  +this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
+        this.fullPrice *= this.priceCoeff;
 
         let screenCount = 0;
         this.count.forEach((screen) => {
@@ -248,6 +252,8 @@ const appData = {
             });
             this.reset();
         });
+
+        btnPlus.style.display = "none";
     },
     
     reset: function(){
@@ -263,6 +269,9 @@ const appData = {
         this.count = [];
         this.servicesPercent = {};
         this.servicesNumber = {};
+        btnPlus.style.display = "block";
+        cmsBlock.style.display = "none";
+        additionalInput.style.display = "none";
         this.init();
     },
 
